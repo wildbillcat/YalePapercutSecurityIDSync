@@ -11,59 +11,103 @@ namespace PapercutSecurityIDSync
 {
     class OracleServer
     {
-        private string constr;
+        private string constrHR;
+        private string constrSC;
         private string ProviderName = "Oracle.DataAccess.Client";
         private DbProviderFactory factory;
 
-        public OracleServer(string user, string pass, string path)
+        public OracleServer(string userHR, string passHR, string pathHR, string userSC, string passSC, string pathSC)
         {
-            constr = "User Id=" + user + "; Password=" + pass + "; Data Source=" + path + ";";
+            constrHR = "User Id=" + userHR + "; Password=" + passHR + "; Data Source=" + pathHR + ";";
+            constrSC = "User Id=" + userSC + "; Password=" + passSC + "; Data Source=" + pathSC + ";";
             factory = DbProviderFactories.GetFactory(ProviderName);
         }
 
         /// <summary>
-        /// Array of strings, Cell 0 = PIDM, Cell 1 = SPRIDEN_ID, Cell 2 = Student Status
+        /// Retrieves the list of users badge Numbers
         /// </summary>
-        /// <param name="NetID">User's NetID</param>
-        /// <param name="TermCode">Term Code for the billing</param>
-        public string[] GetUserInfo(string NetID, string TermCode)
+        /// <param name="NetIDs">List of Users' NetIDs</param>
+        public List<UserInfo> GetUserList(List<string> NetIDs)
         {
-            using (DbConnection conn = factory.CreateConnection())
+            using (DbConnection humanResources = factory.CreateConnection())
             {
-                try
+                using (DbConnection securityResources = factory.CreateConnection())
                 {
-                    conn.ConnectionString = constr;
-                    conn.Open();
-
-                    OracleCommand cmd = (OracleCommand)factory.CreateCommand();
-                    cmd.Connection = (OracleConnection)conn;
-
-                    //Build Query to get student information
-                    string sqlQuery = string.Concat("SELECT syvyids_pidm, syvyids_spriden_id, stvests_code, stvests_desc FROM syvyids, sfbetrm, stvests WHERE (syvyids_pidm = sfbetrm_pidm) AND (sfbetrm_term_code = '", TermCode, "') AND (sfbetrm_ests_code = stvests_code) AND (syvyids_netid = '", NetID, "')");
-                    //Console.WriteLine("Query: " + sqlQuery);
-                    cmd.CommandText = sqlQuery;
-
-                    OracleDataReader reader = cmd.ExecuteReader();
-
-                    if (reader.HasRows)
+                    try
                     {
-                        string[] userinfo = new string[4] { reader.GetInt32(0).ToString(), reader.GetString(1), reader.GetString(2), reader.GetString(3) };
-                        return userinfo;
+                        List<UserInfo> usersList = new List<UserInfo>();
+
+                        humanResources.ConnectionString = constrHR;
+                        humanResources.Open();
+
+                        securityResources.ConnectionString = constrSC;
+                        securityResources.Open();
+
+                        OracleCommand cmdHR = (OracleCommand)factory.CreateCommand();
+                        cmdHR.Connection = (OracleConnection)humanResources;
+
+                        OracleCommand cmdSEC = (OracleCommand)factory.CreateCommand();
+                        cmdSEC.Connection = (OracleConnection)humanResources;
+
+                        string sqlQueryHR = "SELECT upi FROM yuapps.yuhr_current_active_people WHERE (net_id = :NetID)";
+                        string sqlQuerySEC = "SELECT bid, bid_format_id FROM pic_prod.badge_validation_v WHERE (logical_status = 'ACTIVE') AND (upi = :upi)";
+
+                        cmdHR.CommandText = sqlQueryHR;
+                        cmdSEC.CommandText = sqlQuerySEC;
+
+                        foreach (string NetID in NetIDs)
+                        {
+                            cmdHR.Parameters.Add(":NetID", NetID.ToUpper().ToCharArray());
+                            char[] upiNumber = (char[]) cmdHR.ExecuteScalar();
+                            cmdSEC.Parameters.Add(":upi", upiNumber);
+                            OracleDataReader securityReader = cmdSEC.ExecuteReader();
+                            string MagID = null;
+                            string ProxID = null;
+                            while (securityReader.Read())
+                            {
+                                string BID = (string) securityReader.GetValue(0);
+                                int BIDType = securityReader.GetInt32(1);
+                                if (BIDType == UserInfo.Magstrip)
+                                {
+                                    MagID = BID;
+                                }
+                                else if (BIDType == UserInfo.Prox)
+                                {
+                                    ProxID = BID;
+                                }
+                            }
+                            usersList.Add(new UserInfo(NetID, MagID, ProxID));
+                            cmdHR.Parameters.Clear();
+                            cmdSEC.Parameters.Clear();
+                        }
+                        return usersList;
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        Console.WriteLine("Error! No rows returned for the User in Oracle!");
-                        return new string[] { "No Rows in Oracle" };
+                        Console.WriteLine(ex.Message);
+                        Console.WriteLine(ex.StackTrace);
+                        return null;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine(ex.StackTrace);
-                    return new string[] { "ERROR" };
                 }
             }
         }
 
+    }
+
+    public struct UserInfo
+    {
+        string NetID;
+        string MagID;
+        string ProxID;
+
+        public static int Magstrip = 1;
+        public static int Prox = 2;
+
+        public UserInfo(string NetID, string MagID, string ProxID)
+        {
+            this.NetID = NetID;
+            this.MagID = MagID;
+            this.ProxID = ProxID;
+        }
     }
 }

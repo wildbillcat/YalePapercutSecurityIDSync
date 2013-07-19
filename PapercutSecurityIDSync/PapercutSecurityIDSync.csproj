@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IDManager.cs" />
     <Compile Include="OracleServer.cs" />
     <Compile Include="PaperCutServer.cs" />
     <Compile Include="ServerCommandProxy.cs" />
@@ -94,6 +95,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="OracleQueries\hop4.sql" />
     <Content Include="OracleQueries\mdm1.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
