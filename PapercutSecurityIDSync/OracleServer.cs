@@ -9,7 +9,7 @@ using System.Data.Common;
 
 namespace PapercutSecurityIDSync
 {
-    class OracleServer
+    public class OracleServer
     {
         private string constrHR;
         private string constrSC;
@@ -47,7 +47,7 @@ namespace PapercutSecurityIDSync
                         cmdHR.Connection = (OracleConnection)humanResources;
 
                         OracleCommand cmdSEC = (OracleCommand)factory.CreateCommand();
-                        cmdSEC.Connection = (OracleConnection)humanResources;
+                        cmdSEC.Connection = (OracleConnection)securityResources;
 
                         string sqlQueryHR = "SELECT upi FROM yuapps.yuhr_current_active_people WHERE (net_id = :NetID)";
                         string sqlQuerySEC = "SELECT bid, bid_format_id FROM pic_prod.badge_validation_v WHERE (logical_status = 'ACTIVE') AND (upi = :upi)";
@@ -57,26 +57,35 @@ namespace PapercutSecurityIDSync
 
                         foreach (string NetID in NetIDs)
                         {
-                            cmdHR.Parameters.Add(":NetID", NetID.ToUpper().ToCharArray());
-                            char[] upiNumber = (char[]) cmdHR.ExecuteScalar();
-                            cmdSEC.Parameters.Add(":upi", upiNumber);
-                            OracleDataReader securityReader = cmdSEC.ExecuteReader();
-                            string MagID = null;
-                            string ProxID = null;
-                            while (securityReader.Read())
+                            try
                             {
-                                string BID = (string) securityReader.GetValue(0);
-                                int BIDType = securityReader.GetInt32(1);
-                                if (BIDType == UserInfo.Magstrip)
+                                cmdHR.Parameters.Add(":NetID", NetID.ToUpper().ToCharArray());
+                                string upiNumber = (string)cmdHR.ExecuteScalar();
+                                cmdSEC.Parameters.Add(":upi", upiNumber.ToCharArray());
+                                OracleDataReader securityReader = cmdSEC.ExecuteReader();
+                                string MagID = null;
+                                string ProxID = null;
+                                while (securityReader.Read())
                                 {
-                                    MagID = BID;
+                                    string BID = (string)securityReader.GetValue(0);
+                                    int BIDType = securityReader.GetInt32(1);
+                                    if (BIDType == UserInfo.Magstrip)
+                                    {
+                                        MagID = BID;
+                                    }
+                                    else if (BIDType == UserInfo.Prox)
+                                    {
+                                        ProxID = BID;
+                                    }
                                 }
-                                else if (BIDType == UserInfo.Prox)
-                                {
-                                    ProxID = BID;
-                                }
+                                usersList.Add(new UserInfo(NetID, MagID, ProxID));  
                             }
-                            usersList.Add(new UserInfo(NetID, MagID, ProxID));
+                            catch (Exception ex)
+                            {
+                                //Error specific to the user, skip user.
+                                Console.WriteLine(NetID);
+                                Console.WriteLine(ex.Message);
+                            }
                             cmdHR.Parameters.Clear();
                             cmdSEC.Parameters.Clear();
                         }
@@ -96,9 +105,9 @@ namespace PapercutSecurityIDSync
 
     public struct UserInfo
     {
-        string NetID;
-        string MagID;
-        string ProxID;
+        public string NetID;
+        public string MagID;
+        public string ProxID;
 
         public static int Magstrip = 1;
         public static int Prox = 2;

@@ -1,0 +1,10 @@
+﻿IDFilePath = 
+userHR = 
+passHR = 
+pathHR = 
+userSC = 
+passSC = 
+pathSC = 
+paperCutAuthToken = 
+paperCutPort = 
+paperCutServerPath = 

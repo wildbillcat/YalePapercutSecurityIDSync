@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace PapercutSecurityIDSync
 {
 
-    class PaperCutServer
+    public class PaperCutServer
     {
 
         ServerCommandProxy serverProxy;
