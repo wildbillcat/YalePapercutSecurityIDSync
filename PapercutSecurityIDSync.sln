@@ -3,20 +3,38 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PapercutSecurityIDSync", "PapercutSecurityIDSync\PapercutSecurityIDSync.csproj", "{371E7129-011F-44B4-BB98-2F5CFFF7AB7A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{BAE00338-7227-47D0-8132-1DB3C8C27471}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{371E7129-011F-44B4-BB98-2F5CFFF7AB7A}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{371E7129-011F-44B4-BB98-2F5CFFF7AB7A}.Debug|Mixed Platforms.ActiveCfg = Debug|x64
+		{371E7129-011F-44B4-BB98-2F5CFFF7AB7A}.Debug|Mixed Platforms.Build.0 = Debug|x64
 		{371E7129-011F-44B4-BB98-2F5CFFF7AB7A}.Debug|x64.ActiveCfg = Debug|x64
 		{371E7129-011F-44B4-BB98-2F5CFFF7AB7A}.Debug|x64.Build.0 = Debug|x64
 		{371E7129-011F-44B4-BB98-2F5CFFF7AB7A}.Release|Any CPU.ActiveCfg = Release|x64
+		{371E7129-011F-44B4-BB98-2F5CFFF7AB7A}.Release|Mixed Platforms.ActiveCfg = Release|x64
+		{371E7129-011F-44B4-BB98-2F5CFFF7AB7A}.Release|Mixed Platforms.Build.0 = Release|x64
 		{371E7129-011F-44B4-BB98-2F5CFFF7AB7A}.Release|x64.ActiveCfg = Release|x64
 		{371E7129-011F-44B4-BB98-2F5CFFF7AB7A}.Release|x64.Build.0 = Release|x64
+		{BAE00338-7227-47D0-8132-1DB3C8C27471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAE00338-7227-47D0-8132-1DB3C8C27471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAE00338-7227-47D0-8132-1DB3C8C27471}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BAE00338-7227-47D0-8132-1DB3C8C27471}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BAE00338-7227-47D0-8132-1DB3C8C27471}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BAE00338-7227-47D0-8132-1DB3C8C27471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAE00338-7227-47D0-8132-1DB3C8C27471}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAE00338-7227-47D0-8132-1DB3C8C27471}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BAE00338-7227-47D0-8132-1DB3C8C27471}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BAE00338-7227-47D0-8132-1DB3C8C27471}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
