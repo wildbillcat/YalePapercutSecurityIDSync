@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace PapercutSecurityIDSync
 {
@@ -11,15 +12,42 @@ namespace PapercutSecurityIDSync
         string IDFilePath;
         OracleServer oracleServer;
         PaperCutServer paperCutServer;
+        protected Timer tm;
+        DateTime LastIDProcess;
 
         public IDManager()
         {
-
+            LastIDProcess = DateTime.Now.AddDays(-1);
+            tm = new Timer(6000);
+            tm.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+            tm.Enabled = true;
+            tm.AutoReset = true;
+            //tm.Interval = 6000; // 6 Seconds
+            tm.Start();
+            GC.KeepAlive(tm);
         }
 
         public IDManager(string IDFilePath)
         {
             this.IDFilePath = IDFilePath;
+        }
+
+        protected void OnTimedEvent(object source, ElapsedEventArgs e)
+        {
+            if (DateTime.Now.Day != LastIDProcess.Day)
+            {
+                tm.Stop();
+                tm.Enabled = false;
+                readConfiguration();
+
+                if (!System.IO.File.Exists(IDFilePath) || System.IO.File.Exists(IDFilePath) && DateTime.Now.Day != System.IO.File.GetCreationTime(IDFilePath).Day)
+                {
+                    this.ProcessIDs();
+                    LastIDProcess = DateTime.Now;
+                }
+                tm.Enabled = true;
+                tm.Start();
+            }
         }
 
         private void readConfiguration()

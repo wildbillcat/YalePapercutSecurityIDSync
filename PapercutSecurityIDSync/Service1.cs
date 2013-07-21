@@ -12,6 +12,10 @@ namespace PapercutSecurityIDSync
 {
     public partial class Service1 : ServiceBase
     {
+
+        IDManager idmgr;
+
+
         public Service1()
         {
             InitializeComponent();
@@ -19,11 +23,13 @@ namespace PapercutSecurityIDSync
 
         protected override void OnStart(string[] args)
         {
-
+            idmgr = new IDManager();
+            GC.KeepAlive(idmgr);
         }
 
         protected override void OnStop()
         {
+            
         }
     }
 }

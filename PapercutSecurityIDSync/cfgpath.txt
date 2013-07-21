@@ -1,0 +1,1 @@
+﻿C:\Path\of\config.txt
