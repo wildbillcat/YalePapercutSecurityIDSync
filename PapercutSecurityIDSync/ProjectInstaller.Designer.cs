@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.serviceProcessInstaller1 = new System.ServiceProcess.ServiceProcessInstaller();
-            this.PaperCutSecurityIDSync = new System.ServiceProcess.ServiceInstaller();
+            this.serviceInstaller1 = new System.ServiceProcess.ServiceInstaller();
             // 
             // serviceProcessInstaller1
             // 
@@ -37,25 +37,23 @@
             this.serviceProcessInstaller1.Password = null;
             this.serviceProcessInstaller1.Username = null;
             // 
-            // PaperCutSecurityIDSync
+            // serviceInstaller1
             // 
-            this.PaperCutSecurityIDSync.Description = "This Service updates the Papercut Database with Card ID Numbers for Yale\'s Card S" +
-    "ecurity Database.";
-            this.PaperCutSecurityIDSync.DisplayName = "PaperCut Security ID Sync";
-            this.PaperCutSecurityIDSync.ServiceName = "PaperCutSecurityIDSync";
-            this.PaperCutSecurityIDSync.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
+            this.serviceInstaller1.Description = "Paper Cut Security ID Sync";
+            this.serviceInstaller1.DisplayName = "PaperCut Security ID Sync";
+            this.serviceInstaller1.ServiceName = "PaperCutSecurityIDSync";
+            this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
             // ProjectInstaller
             // 
             this.Installers.AddRange(new System.Configuration.Install.Installer[] {
-            this.serviceProcessInstaller1,
-            this.PaperCutSecurityIDSync});
+            this.serviceProcessInstaller1});
 
         }
 
         #endregion
 
         private System.ServiceProcess.ServiceProcessInstaller serviceProcessInstaller1;
-        private System.ServiceProcess.ServiceInstaller PaperCutSecurityIDSync;
+        private System.ServiceProcess.ServiceInstaller serviceInstaller1;
     }
 }

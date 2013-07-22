@@ -21,5 +21,14 @@ namespace PapercutSecurityIDSyncTests
             IDMan.WriteIDs(UserList);
             //paperCutServer.SetPaperCutUserIDs(IDFilePath);
         }
+
+        [TestMethod]
+        public void ProcessIDsUsingIDManager()
+        {
+            IDManager IDMan = new IDManager(TestConfig.IDFilePath);
+            IDMan.OnTimedEvent(null, null);
+            //paperCutServer.SetPaperCutUserIDs(IDFilePath);
+        }
+
     }
 }

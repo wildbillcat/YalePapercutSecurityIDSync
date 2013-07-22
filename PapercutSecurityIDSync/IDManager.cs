@@ -29,9 +29,14 @@ namespace PapercutSecurityIDSync
         public IDManager(string IDFilePath)
         {
             this.IDFilePath = IDFilePath;
+            tm = new Timer(6000);
+            tm.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+            tm.Enabled = false;
+            tm.Stop();
+            tm.AutoReset = true;
         }
 
-        protected void OnTimedEvent(object source, ElapsedEventArgs e)
+        public void OnTimedEvent(object source, ElapsedEventArgs e)
         {
             if (DateTime.Now.Day != LastIDProcess.Day)
             {
@@ -58,23 +63,23 @@ namespace PapercutSecurityIDSync
             {
                 cwd = string.Concat(cwd, @"\");
             }
-            //Read Text file that points service at the Billing Directory
-            using (System.IO.StreamReader dirPath = new System.IO.StreamReader(string.Concat(cwd, "cfgpath.txt")))
+
+            //Test to see if the path to the config file has been configured. If missing, return.
+            string cfgpath = string.Concat(cwd, "cfgpath.txt");
+            if (!System.IO.File.Exists(cfgpath))
+            {
+                return;
+            }
+
+            using (System.IO.StreamReader dirPath = new System.IO.StreamReader(cfgpath))
             {
                 ConfigPath = dirPath.ReadLine();
             }
             
-            //Directory Test
-            if (!System.IO.Directory.Exists(ConfigPath)) //The Billing Directory Does not Exist!
-            {
-                Console.WriteLine("Billing Directory does not exist!");
-                return;
-            }
 
             //Config File Test
-            if (!System.IO.File.Exists(ConfigPath)) //The Billing Directory Does not Exist!
+            if (!System.IO.File.Exists(ConfigPath)) //The Config File Does not Exist!
             {
-                Console.WriteLine("Billing Directory does not exist!");
                 return;
             }
 
