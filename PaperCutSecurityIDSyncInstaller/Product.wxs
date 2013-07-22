@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="9838b7c9-6388-4591-ba87-d0eb69f0cbcd" Name="PaperCutSecurityIDSyncInstaller" Language="1033" Version="0.0.1.0" Manufacturer="Patrick McMorran" UpgradeCode="899eab99-c844-478d-8e54-8b5001c599c2">
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Comments="Created by Patrick McMorran. This is 'Unlicensed' Software, http://unlicense.org/" />
+	<Product Id="9838b7c9-6388-4591-ba87-d0eb69f0cbcd" Name="PaperCutSecurityIDSync" Language="1033" Version="0.0.1.0" Manufacturer="Patrick McMorran" UpgradeCode="899eab99-c844-478d-8e54-8b5001c599c2">
+		<Package InstallerVersion="200" Platform="x64" Compressed="yes" InstallScope="perMachine" Comments="Created by Patrick McMorran. This is 'Unlicensed' Software, http://unlicense.org/" />
     <UIRef Id="WixUI_Minimal" />
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate EmbedCab="yes"/>
     
-		<Feature Id="ProductFeature" Title="PaperCutSecurityIDSyncInstaller" Level="1">
+		<Feature Id="ProductFeature" Title="PaperCutSecurityIDSync" Level="1">
       <ComponentRef Id="CMP_configTXT" />
       <ComponentRef Id="CMP_cfgpathTXT" />
       <ComponentRef Id="CMP_CookComputingXmlRpcV2DLL" />
@@ -14,8 +14,8 @@
 		</Feature>
 
     <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="ProgramFilesFolder">
-        <Directory Id="INSTALLFOLDER" Name="PaperCutSecurityIDSyncInstaller" />
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="INSTALLFOLDER" Name="PaperCutSecurityIDSyncInstaller">
 
         <Component Id="CMP_configTXT"
                  Guid="241e5ba6-bac9-4a65-acc5-57bb6967e6c6">
@@ -57,6 +57,7 @@
              />
           <ServiceControl Id="StartService" Start="install" Stop="both" Remove="uninstall" Name="PaperCutSecurityIDSync" Wait="yes" />
         </Component>
+        </Directory>
       </Directory>
     </Directory>
     
