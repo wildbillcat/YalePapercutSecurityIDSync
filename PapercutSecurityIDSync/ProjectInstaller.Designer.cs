@@ -33,11 +33,14 @@
             // 
             // serviceProcessInstaller1
             // 
+            this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
             this.serviceProcessInstaller1.Password = null;
             this.serviceProcessInstaller1.Username = null;
             // 
             // PaperCutSecurityIDSync
             // 
+            this.PaperCutSecurityIDSync.Description = "This Service updates the Papercut Database with Card ID Numbers for Yale\'s Card S" +
+    "ecurity Database.";
             this.PaperCutSecurityIDSync.DisplayName = "PaperCut Security ID Sync";
             this.PaperCutSecurityIDSync.ServiceName = "PaperCutSecurityIDSync";
             this.PaperCutSecurityIDSync.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
