@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="PaperCutSecurityIDSyncInstaller" Language="1033" Version="1.0.0.0" Manufacturer="" UpgradeCode="899eab99-c844-478d-8e54-8b5001c599c2">
+	<Product Id="9838b7c9-6388-4591-ba87-d0eb69f0cbcd" Name="PaperCutSecurityIDSyncInstaller" Language="1033" Version="0.0.1.0" Manufacturer="Patrick McMorran" UpgradeCode="899eab99-c844-478d-8e54-8b5001c599c2">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
@@ -44,6 +44,18 @@
           <File Id="FILE_MyProgramDir_PapercutSecurityIDSyncEXE"
                 Source="$(var.FilesPath)PapercutSecurityIDSync.exe"
                 KeyPath="yes" />
+           
+          <ServiceInstall
+             Id="ServiceInstaller"
+             Type="ownProcess"
+             Name="PaperCutSecurityIDSync"
+             DisplayName="PaperCut Security ID Sync"
+             Description="This is an application that interfaces Papercut with the Yale Security Card Database."
+             Start="auto"
+             Account="LocalSystem"
+             ErrorControl="normal"
+             />
+          <ServiceControl Id="StartService" Start="install" Stop="both" Remove="uninstall" Name="PaperCutSecurityIDSync" Wait="yes" />
         </Component>
       </Directory>
     </Directory>
