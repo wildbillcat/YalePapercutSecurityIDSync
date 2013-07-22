@@ -22,7 +22,6 @@ namespace PapercutSecurityIDSync
             tm.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             tm.Enabled = true;
             tm.AutoReset = true;
-            //tm.Interval = 6000; // 6 Seconds
             tm.Start();
             GC.KeepAlive(tm);
         }

@@ -6,44 +6,26 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PapercutSecurityIDSyncTests", "UnitTestProject1\PapercutSecurityIDSyncTests.csproj", "{BAE00338-7227-47D0-8132-1DB3C8C27471}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "PaperCutSecurityIDSyncInstaller", "PaperCutSecurityIDSyncInstaller\PaperCutSecurityIDSyncInstaller.wixproj", "{B2BB821A-54DC-47A1-835F-79F47CA80E41}"
+	ProjectSection(ProjectDependencies) = postProject
+		{371E7129-011F-44B4-BB98-2F5CFFF7AB7A} = {371E7129-011F-44B4-BB98-2F5CFFF7AB7A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
-		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x64 = Release|x64
-		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{371E7129-011F-44B4-BB98-2F5CFFF7AB7A}.Debug|Mixed Platforms.ActiveCfg = Debug|x64
-		{371E7129-011F-44B4-BB98-2F5CFFF7AB7A}.Debug|Mixed Platforms.Build.0 = Debug|x64
 		{371E7129-011F-44B4-BB98-2F5CFFF7AB7A}.Debug|x64.ActiveCfg = Debug|x64
 		{371E7129-011F-44B4-BB98-2F5CFFF7AB7A}.Debug|x64.Build.0 = Debug|x64
-		{371E7129-011F-44B4-BB98-2F5CFFF7AB7A}.Debug|x86.ActiveCfg = Debug|x64
-		{371E7129-011F-44B4-BB98-2F5CFFF7AB7A}.Release|Mixed Platforms.ActiveCfg = Release|x64
-		{371E7129-011F-44B4-BB98-2F5CFFF7AB7A}.Release|Mixed Platforms.Build.0 = Release|x64
 		{371E7129-011F-44B4-BB98-2F5CFFF7AB7A}.Release|x64.ActiveCfg = Release|x64
 		{371E7129-011F-44B4-BB98-2F5CFFF7AB7A}.Release|x64.Build.0 = Release|x64
-		{371E7129-011F-44B4-BB98-2F5CFFF7AB7A}.Release|x86.ActiveCfg = Release|x64
-		{BAE00338-7227-47D0-8132-1DB3C8C27471}.Debug|Mixed Platforms.ActiveCfg = Debug|x64
-		{BAE00338-7227-47D0-8132-1DB3C8C27471}.Debug|Mixed Platforms.Build.0 = Debug|x64
 		{BAE00338-7227-47D0-8132-1DB3C8C27471}.Debug|x64.ActiveCfg = Debug|x64
 		{BAE00338-7227-47D0-8132-1DB3C8C27471}.Debug|x64.Build.0 = Debug|x64
-		{BAE00338-7227-47D0-8132-1DB3C8C27471}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{BAE00338-7227-47D0-8132-1DB3C8C27471}.Release|Mixed Platforms.ActiveCfg = Release|x64
 		{BAE00338-7227-47D0-8132-1DB3C8C27471}.Release|x64.ActiveCfg = Release|x64
-		{BAE00338-7227-47D0-8132-1DB3C8C27471}.Release|x86.ActiveCfg = Release|Any CPU
-		{B2BB821A-54DC-47A1-835F-79F47CA80E41}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{B2BB821A-54DC-47A1-835F-79F47CA80E41}.Debug|x64.ActiveCfg = Debug|x86
-		{B2BB821A-54DC-47A1-835F-79F47CA80E41}.Debug|x86.ActiveCfg = Debug|x86
-		{B2BB821A-54DC-47A1-835F-79F47CA80E41}.Debug|x86.Build.0 = Debug|x86
-		{B2BB821A-54DC-47A1-835F-79F47CA80E41}.Release|Mixed Platforms.ActiveCfg = Release|x64
-		{B2BB821A-54DC-47A1-835F-79F47CA80E41}.Release|Mixed Platforms.Build.0 = Release|x64
-		{B2BB821A-54DC-47A1-835F-79F47CA80E41}.Release|x64.ActiveCfg = Release|x86
-		{B2BB821A-54DC-47A1-835F-79F47CA80E41}.Release|x86.ActiveCfg = Release|x86
-		{B2BB821A-54DC-47A1-835F-79F47CA80E41}.Release|x86.Build.0 = Release|x86
+		{B2BB821A-54DC-47A1-835F-79F47CA80E41}.Release|x64.ActiveCfg = Release|x64
+		{B2BB821A-54DC-47A1-835F-79F47CA80E41}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

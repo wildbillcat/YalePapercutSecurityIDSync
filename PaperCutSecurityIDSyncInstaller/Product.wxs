@@ -15,7 +15,7 @@
 
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFiles64Folder">
-        <Directory Id="INSTALLFOLDER" Name="PaperCutSecurityIDSyncInstaller">
+        <Directory Id="INSTALLFOLDER" Name="PaperCutSecurityIDSync">
 
         <Component Id="CMP_configTXT"
                  Guid="241e5ba6-bac9-4a65-acc5-57bb6967e6c6">

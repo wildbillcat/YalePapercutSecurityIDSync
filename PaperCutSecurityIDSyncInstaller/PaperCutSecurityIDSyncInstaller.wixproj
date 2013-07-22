@@ -6,7 +6,7 @@
     <ProductVersion>3.7</ProductVersion>
     <ProjectGuid>b2bb821a-54dc-47a1-835f-79f47ca80e41</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>PaperCutSecurityIDSyncInstaller</OutputName>
+    <OutputName>PaperCutSecurityIDSync</OutputName>
     <OutputType>Package</OutputType>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
