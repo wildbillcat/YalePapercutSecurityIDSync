@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="PaperCutSecurityIDSyncInstaller" Language="1033" Version="1.0.0.0" Manufacturer="" UpgradeCode="899eab99-c844-478d-8e54-8b5001c599c2">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="PaperCutSecurityIDSyncInstaller" Level="1">
+      <ComponentRef Id="CMP_configTXT" />
+      <ComponentRef Id="CMP_cfgpathTXT" />
+      <ComponentRef Id="CMP_CookComputingXmlRpcV2DLL" />
+      <ComponentRef Id="CMP_PapercutSecurityIDSyncEXE" />
+		</Feature>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="PaperCutSecurityIDSyncInstaller" />
+
+        <Component Id="CMP_configTXT"
+                 Guid="241e5ba6-bac9-4a65-acc5-57bb6967e6c6">
+
+          <File Id="FILE_MyProgramDir_configTXT"
+                Source="$(var.FilesPath)config.txt"
+                KeyPath="yes" />
+        </Component>
+        <Component Id="CMP_cfgpathTXT"
+                 Guid="bf5c95f2-9f9d-40f0-8e34-14df7a0f1708">
+
+          <File Id="FILE_MyProgramDir_cfgpathTXT"
+                Source="$(var.FilesPath)cfgpath.txt"
+                KeyPath="yes" />
+        </Component>
+        <Component Id="CMP_CookComputingXmlRpcV2DLL"
+                 Guid="0b57bfbc-39b3-474f-bd90-4aba7c211992">
+
+          <File Id="FILE_MyProgramDir_CookComputingXmlRpcV2DLL"
+                Source="$(var.FilesPath)CookComputing.XmlRpcV2.dll"
+                KeyPath="yes" />
+        </Component>
+        <Component Id="CMP_PapercutSecurityIDSyncEXE"
+                 Guid="e864b4c8-0679-40ab-adfd-1f7d1f008897">
+
+          <File Id="FILE_MyProgramDir_PapercutSecurityIDSyncEXE"
+                Source="$(var.FilesPath)PapercutSecurityIDSync.exe"
+                KeyPath="yes" />
+        </Component>
+      </Directory>
+    </Directory>
+    
+	</Product>
+
+	<Fragment>
+		
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<!-- <Component Id="ProductComponent"> -->
+				<!-- TODO: Insert files, registry keys, and other resources here. -->
+			<!-- </Component> -->
+		</ComponentGroup>
+	</Fragment>
+</Wix>
