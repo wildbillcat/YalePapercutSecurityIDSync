@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Product Id="9838b7c9-6388-4591-ba87-d0eb69f0cbcd" Name="PaperCutSecurityIDSyncInstaller" Language="1033" Version="0.0.1.0" Manufacturer="Patrick McMorran" UpgradeCode="899eab99-c844-478d-8e54-8b5001c599c2">
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
-
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Comments="Created by Patrick McMorran. This is 'Unlicensed' Software, http://unlicense.org/" />
+    <UIRef Id="WixUI_Minimal" />
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-		<MediaTemplate />
-
+		<MediaTemplate EmbedCab="yes"/>
+    
 		<Feature Id="ProductFeature" Title="PaperCutSecurityIDSyncInstaller" Level="1">
       <ComponentRef Id="CMP_configTXT" />
       <ComponentRef Id="CMP_cfgpathTXT" />
